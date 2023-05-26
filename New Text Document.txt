@@ -1,0 +1,42 @@
+
+function getResult(givenIn,currentIndex){
+    function compileAnwser(list,operator){
+    
+    const reducer=(accumalator,currentVal)=>{
+        console.log(currentVal,"hit")
+        if (operator==='&&'){
+            return accumalator && currentVal
+        }
+        else{
+            return accumalator || currentVal
+        }
+    }
+    const result=list.reduce(reducer)
+    return result
+}
+     const reduceVal=(accumalator,currentVal)=>{
+         console.log(accumalator)
+         if (currentVal.operator==='&&'){
+             return accumalator && compileAnwser(currentVal.values,currentVal.operator)
+         }
+         else{
+             return accumalator || compileAnwser(currentVal.values,currentVal.operator)
+         }
+     }
+     const finalVal=givenIn.reduce(reduceVal)
+
+
+     
+     return finalVal
+}
+
+
+const arr=[{
+    operator:'&&',
+    values:[true,false,false,true]
+},{
+    operator:'||',
+    values:[true,false,false,true]
+}]
+
+const value=getResult(arr,0)
